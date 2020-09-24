@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function validate(){
+            var name=document.getElementById('name').value;
+            var email=document.getElementById('email').value;
+            var password=document.getElementById('password').value;
+            var phone=document.getElementById('phone').value;
+            var nameLength=name.length;
+            var passwordLength=password.length;
+            var phoneLength=phone.length;
+            var mailformat=/(.+)@(.+){2,}\.(.+){2,}/
+            var pattern= /^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})/
+            var names=['nisarga','nithya'];
+             if( nameLength<6 || nameLength>15)
+            {
+                alert("Name cannot be empty or number or less than 3 or greater than 15");
+                document.getElementById('name').focus();
+            }
+            else if(!(password.match(pattern)) )
+            {
+                alert("password must contain upper case, lower case, special character, number ");
+                document.getElementById('password').focus();
+            }
+            else if(!(email!="" && email.match(mailformat)))
+            {
+                alert("e-mail cannot be empty or invalid e-mail address....please check again");
+                document.getElementById('email').focus();
+            }
+            
+            else if(isNaN(phone) || phoneLength!=10 )
+            {
+                alert("Phone number cannot be null or string and should be 10 digits");
+                document.getElementById('phone').focus();
+            }
+            // else if(names.indexOf(name)!==-1){
+            //     alert("name already exist");
+            //     document.getElementById('name').focus();
+            // }
+            else if(names.indexOf(name)==-1){
+                document.getElementById("print").innerHTML="Welcome "+name+"<br>"+password+" <br>"+email+"<br> "+phone;
+            }
+            
+            else 
+            {
+                
+                // document.getElementById("print").innerHTML="successfully registered";
+                document.getElementById("myForm").submit();
+               
+            }
+        }
+        
+            
+            
+    </script>
+</head>
+<body>
+    <form action="http://localhost:3000/showuser" id="myForm" method="GET" >
+        username:<input type="text" id="name" name="user" required><br><br>
+        Password:<input type="password" id="password"><br><br>
+        Email<input type="text" id="email"><br><br>
+        Phone:<input type="tel" id="phone"><br><br>
+       
+        <input type="button" value="register" onclick="validate();" >
+        
+    </form>
+    <div id="print"></div>
+</body>
+</html>
+
